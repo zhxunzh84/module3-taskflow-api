@@ -206,3 +206,86 @@ curl -i https://module3-taskflow-api-production-f5aa.up.railway.app/api/tasks
 ### Deployment Issues
 
 No blocking issues were encountered during the verified local Docker build, container startup, or Railway deployment.
+
+
+## Module 4 — Optional 1: GitHub Actions CI/CD
+
+### Automated Build and Publish Pipeline
+
+GitHub Actions automatically builds, tests, and publishes the TaskFlow API Docker image to Docker Hub.
+
+**Workflow:** [.github/workflows/docker-publish.yml](.github/workflows/docker-publish.yml)
+
+**Pipeline:**
+
+1. Checkout the GitHub repository.
+2. Set up Java 21 and Maven dependency caching.
+3. Run `mvn --batch-mode verify` as the CI quality gate.
+4. Configure Docker Buildx.
+5. Authenticate to Docker Hub using GitHub Actions Secrets.
+6. Generate Docker image tags.
+7. Build and push the Docker image to Docker Hub.
+
+### Workflow Triggers
+
+- Push to the `main` branch.
+- Push a Git tag matching `v*`.
+- Manual execution using `workflow_dispatch`.
+
+If Maven verification fails, subsequent Docker publishing steps will not execute.
+
+Docker Hub credentials are stored securely in GitHub Actions Secrets:
+
+- `DOCKERHUB_USERNAME`
+- `DOCKERHUB_TOKEN`
+
+No Docker Hub credentials are committed to the repository.
+
+### CI/CD Verification
+
+The first automated pipeline was successfully executed for commit `13851d2`.
+
+The workflow completed Maven verification, Docker image building, and publishing to Docker Hub.
+
+**GitHub Actions:** https://github.com/zhxunzh84/module3-taskflow-api/actions
+
+## Module 4 — Optional 4: Docker Image Versioning
+
+### Docker Hub Repository
+
+**Repository:** https://hub.docker.com/r/zhxunzh84/taskflow-api
+
+The Docker image is published with multiple tags for traceability and version management.
+
+| Docker Image Tag | Purpose |
+|---|---|
+| `latest` | Latest successful build from the main branch |
+| `sha-13851d2` | Image associated with Git commit `13851d2` |
+| `1.0.0` | First versioned release |
+
+### Versioned Release
+
+An annotated Git tag, `v1.0.0`, was created for commit `13851d2` and pushed to GitHub.
+
+The Git tag triggered the GitHub Actions workflow, which successfully published the Docker image with version tag `1.0.0`.
+
+**Release verification:**
+
+- Git tag `v1.0.0` successfully pushed.
+- GitHub Actions release pipeline completed successfully.
+- Docker Hub image tag `1.0.0` verified.
+
+### Pull and Run a Versioned Image
+
+```bash
+docker pull zhxunzh84/taskflow-api:1.0.0
+docker run --rm -p 8080:8080 zhxunzh84/taskflow-api:1.0.0
+```
+
+Verify the API from another terminal:
+
+```bash
+curl -i http://localhost:8080/api/tasks
+```
+
+The expected response for a new in-memory task store is HTTP 200 with JSON body `[]`.
