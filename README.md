@@ -128,3 +128,81 @@ Task data is stored in memory using a HashMap. Data is not persisted across appl
 NTU Module 3 — End of Module Assignment
 
 **Project:** TaskFlow — Task Management API
+
+## Module 4 — Dockerization & Cloud Deployment
+
+### Deployment Overview
+
+The TaskFlow API has been containerized using a multi-stage Docker build and successfully deployed to Railway.
+
+- **Platform:** Railway
+- **Containerization:** Docker (Multi-stage Build)
+- **Java:** 21
+- **Spring Boot:** 4.1.2
+- **Build Tool:** Apache Maven
+- **Application Port:** 8080
+- **Deployment Source:** GitHub (`main` branch)
+
+### Live Application
+
+**Production API:** https://module3-taskflow-api-production-f5aa.up.railway.app/api/tasks
+
+The endpoint returns a JSON array of tasks. An empty array (`[]`) is expected when no tasks have been created, as the application uses in-memory storage.
+
+### Docker Build and Local Testing
+
+Build the Docker image:
+
+```bash
+docker build -t taskflow:latest .
+```
+
+Run the container:
+
+```bash
+docker run -p 8080:8080 taskflow:latest
+```
+
+Verify the API:
+
+```bash
+curl -i http://localhost:8080/api/tasks
+```
+
+**Local test result:** HTTP 200 OK, with a valid JSON response.
+
+### Railway Deployment
+
+The application is deployed from the GitHub repository using the root-level Dockerfile.
+
+The deployment was verified through the public HTTPS endpoint.
+
+**Production verification:**
+
+```bash
+curl -i https://module3-taskflow-api-production-f5aa.up.railway.app/api/tasks
+```
+
+**Result:** HTTP 200 OK, `Content-Type: application/json`, response body `[]`.
+
+### Deployment Screenshots
+
+**Railway Dashboard — Successful Deployment**
+
+![Railway Dashboard](screenshots/railway-dashboard.png)
+
+**Live API — JSON Response**
+
+![Live API Response](screenshots/live-api.png)
+
+### Technical Notes
+
+- The Dockerfile uses a multi-stage build with Maven and Java 21.
+- The application runs on port 8080.
+- Task data is stored in memory and will be reset when the application restarts or redeploys.
+- The basic task-list endpoint does not require an OpenAI API call.
+- The AI summary endpoint requires a valid OpenAI API key and should not be publicly exposed without appropriate access controls.
+
+### Deployment Issues
+
+No blocking issues were encountered during the verified local Docker build, container startup, or Railway deployment.
