@@ -1,0 +1,23 @@
+# Maven build output
+target/
+
+# Git metadata
+.git/
+.gitignore
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Documentation screenshots
+screenshots/
