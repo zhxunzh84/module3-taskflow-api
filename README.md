@@ -1,6 +1,6 @@
 # TaskFlow API
 
-A task management REST API built with Java 21, Spring Boot 4.1.1, Maven, and Spring AI.
+A task management REST API built with Java 21, Spring Boot 4.1.2, Maven, and Spring AI.
 
 Developed as part of the NTU Advanced Professional Certificate in AI Engineering — Module 3 End of Module Assignment.
 
@@ -13,7 +13,7 @@ The project follows a layered Spring Boot architecture and includes an optional 
 ## Technology Stack
 
 - Java 21
-- Spring Boot 4.1.1
+- Spring Boot 4.1.2
 - Spring Web / Spring MVC
 - Spring AI 2.0.1 with OpenAI
 - Maven
