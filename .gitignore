@@ -39,3 +39,6 @@ build/
 
 ### macOS ###
 .DS_Store
+
+# Generated security scan reports
+/security-reports/
