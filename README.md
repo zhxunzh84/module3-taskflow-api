@@ -2,7 +2,19 @@
 
 A task management REST API built with Java 21, Spring Boot 4.1.2, Maven, and Spring AI.
 
-Developed as part of the NTU Advanced Professional Certificate in AI Engineering — Module 3 End of Module Assignment.
+Developed as the **Module 3 API project** for the **NTU Advanced Professional Certificate in AI Engineering**, then extended for the **Module 4 End of Module Assignment** with Dockerization, Railway cloud deployment, GitHub Actions CI/CD, and Docker Hub image versioning.
+
+## Module 4 Assignment Submission Summary
+
+Following the [official starter README](https://github.com/aie-devops/taskflow-api#assignment-submission), submit only this GitHub repository URL to NTULearn: https://github.com/zhxunzh84/module3-taskflow-api. The live URL, screenshots, and assignment notes are included in this README.
+
+- **Railway live API:** [GET /api/tasks](https://module3-taskflow-api-production-f5aa.up.railway.app/api/tasks).
+- **Existing screenshots:** [Railway dashboard](screenshots/railway-dashboard.png) and [live API response](screenshots/live-api.png); both are displayed in the Deployment Screenshots section below.
+- **Core tasks completed:** Dockerization with a multi-stage Dockerfile, local Docker build and container testing, Railway cloud deployment, and verification of the public API returning HTTP 200 with a JSON response.
+- **Optional 1 — GitHub Actions CI/CD:** Maven verification, automated Docker builds, and publishing to Docker Hub. See the [workflow](.github/workflows/docker-publish.yml) and [pipeline runs](https://github.com/zhxunzh84/module3-taskflow-api/actions).
+- **Optional 4 — Docker image versioning:** Git tag `v1.0.0` and Docker Hub tags `1.0.0`, `latest`, and commit-based `sha-*` tags. See [Docker Hub](https://hub.docker.com/r/zhxunzh84/taskflow-api/tags).
+- **Security scanning / Optional 5:** Trivy image scanning has been completed. The workflow saves a JSON scan report and uses `exit-code: "0"`, so a successful workflow does not establish that the image has no vulnerabilities. OWASP Dependency-Check alerts remain unverified; they are not claimed to be resolved or confirmed false positives. No further Optional 5 work is being pursued, and Optional 5 is not claimed as complete.
+- **Errors and failures:** No blocking deployment issues were encountered during the verified local Docker build, container startup, or Railway deployment. The unverified OWASP alerts above remain a separate security limitation.
 
 ## Overview
 
@@ -125,7 +137,7 @@ Task data is stored in memory using a HashMap. Data is not persisted across appl
 
 ## Assignment
 
-NTU Module 3 — End of Module Assignment
+NTU Module 3 — API project; Module 4 — Dockerization, cloud deployment, and CI/CD End of Module Assignment.
 
 **Project:** TaskFlow — Task Management API
 
